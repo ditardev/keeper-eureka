@@ -1,4 +1,4 @@
-name: cerg-action-process
+name: eureka-action-process
 env:
   APPLICATION_NAME : "Keeper-Eureka"
 on: 
@@ -7,7 +7,7 @@ on:
       - master
 
 jobs:
-  CerjDocker:
+  Keeper-eureka:
     runs-on: self-hosted
     
     steps:
