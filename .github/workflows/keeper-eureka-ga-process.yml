@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: PrintAppData
         run : |
-          echo "Application name: ${{ env.APPLICATION_NAME}}"
+          echo "Application name2: ${{ env.APPLICATION_NAME}}"
 
                  
         
