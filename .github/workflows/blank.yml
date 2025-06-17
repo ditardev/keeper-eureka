@@ -1,0 +1,21 @@
+name: cerg-action-process
+env:
+  APPLICATION_NAME : "Keeper-Eureka"
+on: 
+  push:
+    branches: 
+      - master
+
+jobs:
+  CerjDocker:
+    runs-on: self-hosted
+    
+    steps:
+      - name: PrintAppData
+        run : |
+          echo "Application name: ${{ env.APPLICATION_NAME}}"
+
+                 
+        
+
+
