@@ -1,0 +1,4 @@
+FROM amazoncorretto:21 as build
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} EurekaApplication.jar
+ENTRYPOINT ["java","-jar","EurekaApplication.jar"]
