@@ -1,6 +1,10 @@
 server:
   port: 8761
   ip: localhost
+  shutdown: graceful
+  servlet:
+    session:
+      timeout: 30s
 
 spring:
   application:
