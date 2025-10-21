@@ -15,7 +15,6 @@ jobs:
       - name: PrintAppData
         run : |
           echo "Application name: ${{ env.APPLICATION_NAME}}"
-          working-directory: ./app
 
                  
         
