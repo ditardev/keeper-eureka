@@ -8,16 +8,14 @@ on:
 
 jobs:
   Keeper-eureka:
-    defaults:
-      run:
-        working-directory: ./core
 
     runs-on: self-hosted
     
     steps:
       - name: PrintAppData
         run : |
-          echo "Application name2: ${{ env.APPLICATION_NAME}}"
+          echo "Application name: ${{ env.APPLICATION_NAME}}"
+          working-directory: ./app
 
                  
         
