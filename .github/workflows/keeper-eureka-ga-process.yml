@@ -20,7 +20,7 @@ jobs:
           clean: 'false'
       - name: Gradle Eureka clean-build
         run : |
-          ./gradlew clean build -x test              
+          gradle clean build -x test              
         
 
 
