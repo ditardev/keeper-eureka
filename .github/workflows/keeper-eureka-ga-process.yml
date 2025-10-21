@@ -28,6 +28,6 @@ jobs:
           bash ${{env.APP_NAME}}_update.sh
       - name: Docker Compose up
         run : |
-          cd /home/ditar/DataDrive/actions-runner/keeper-actions/${{env.DIR_NAME}}"
+          cd /home/ditar/DataDrive/actions-runner/keeper-actions/${{env.DIR_NAME}}
           docker compose -f ${{env.COMPOSE_NAME}}" up -d
 
