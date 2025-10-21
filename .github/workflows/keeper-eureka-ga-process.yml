@@ -1,6 +1,6 @@
 name: eureka-action-process
 env:
-  APP_NAME : "keeper-eureka"
+  APP_NAME : "keeper_eureka"
   DIR_NAME : "_docker/core"
   COMPOSE_NAME: "keeper-core-compose.yml"
 on: 
