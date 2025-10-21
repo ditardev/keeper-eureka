@@ -4,10 +4,14 @@ env:
 on: 
   push:
     branches: 
-      - main
+      - prod
 
 jobs:
   Keeper-eureka:
+    defaults:
+      run:
+        working-directory: ./core
+
     runs-on: self-hosted
     
     steps:
