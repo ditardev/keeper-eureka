@@ -21,6 +21,11 @@ jobs:
       - name: Gradle Eureka clean-build
         run : |
           gradle clean build -x test              
-        
-
+      - name: Docker Eureka Update
+        run : |
+          bash keeper_eureka_update.sh
+      - name: Docker Compose up
+        run : |
+          cd /home/ditar/DataDrive/actions-runner/keeper-actions/_docker/core
+          docker compose -f keeper-core-compose.yml up -d
 
