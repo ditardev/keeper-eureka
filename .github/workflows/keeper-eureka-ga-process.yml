@@ -18,12 +18,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           clean: 'false'
-      - name: Gradle Eureka clean-build
+      - name: Gradle ${{ env.APPLICATION_NAME}} clean-build
         run : |
           gradle clean build -x test              
-      - name: Docker Eureka Update
+      - name: Docker ${{ env.APPLICATION_NAME}} Update
         run : |
-          bash keeper_eureka_update.sh
+          bash ${{ env.APPLICATION_NAME}}_update.sh
       - name: Docker Compose up
         run : |
           cd /home/ditar/DataDrive/actions-runner/keeper-actions/_docker/core
