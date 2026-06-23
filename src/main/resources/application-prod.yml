@@ -1,5 +1,5 @@
 server:
-  name: wms-core-eureka
+  name: keeper-core-eureka
   port: 8761
   ip: localhost
   logging:
