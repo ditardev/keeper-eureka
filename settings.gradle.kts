@@ -1,1 +1,1 @@
-rootProject.name = "eureka"
+rootProject.name = "keeper-eureka"
