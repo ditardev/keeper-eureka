@@ -10,7 +10,7 @@ plugins {
 
 group = "com.micro"
 version = "0.0.1"
-description = "wms-core-eureka"
+description = "keeper-core-eureka"
 
 java {
 	toolchain {
