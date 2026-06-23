@@ -1,0 +1,10 @@
+server:
+  name: wms-core-eureka
+  port: 8761
+  ip: host.docker.internal
+  eureka:
+    hostname: host.docker.internal
+    prefer-ip: false
+  logging:
+    level: info
+    filePath: ../logs/eureka/eureka.log

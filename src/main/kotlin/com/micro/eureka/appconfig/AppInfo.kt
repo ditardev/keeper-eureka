@@ -19,6 +19,9 @@ class AppInfo {
     @Value("\${server.ip}")
     private val serverIp: String? = null
 
+    @Value("\${server.version}")
+    private val version: String? = null
+
     private val startDelimiter = "=============^_^============="
     private val stopDelimiter = "============================="
 
@@ -31,6 +34,7 @@ class AppInfo {
                 "Application: " + appName + ln +
                 "Server port: " + serverPort + ln +
                 "Server ip: " + serverIp + ln +
+                "Server version: " + version + ln +
                 "Start date time: " + Date() + ln +
                 stopDelimiter
         println(builder)

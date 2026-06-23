@@ -1,0 +1,7 @@
+server:
+  name: wms-core-eureka
+  port: 8761
+  ip: localhost
+  logging:
+    level: info
+    filePath: ../logs/eureka/eureka.log
