@@ -1,6 +1,6 @@
 #!/bin/bash
-readonly container_name=keeper_eureka_c
-readonly image_name=keeper_eureka_img
+readonly container_name=keeper-eureka-c
+readonly image_name=keeper-eureka-img
 
 echo $container_name
 echo $image_name
