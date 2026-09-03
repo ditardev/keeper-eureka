@@ -1,33 +1,41 @@
-name: eureka-action-process
+name: keeper-eureka
 env:
-  APP_NAME : "keeper_eureka"
-  DIR_NAME : "_docker/core"
-  COMPOSE_NAME: "keeper-core-compose.yml"
-on: 
+  SERVICE: keeper-eureka
+  LAYER: core
+  COMPOSE_FILE: keeper-core-compose.yml
+  KEEPER_ROOT: /home/ditar/DataDrive/actions-runner/keeper-actions/repositories
+on:
   push:
-    branches: 
+    branches:
       - prod
 
 jobs:
-  Keeper-eureka:
+  deploy:
     runs-on: self-hosted
-    
     steps:
-      - name: PrintAppData
-        run : |
-          echo "Application name: ${{env.APP_NAME}}"
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          clean: 'false'
-      - name: Gradle ${{env.APP_NAME}} clean-build
-        run : |
-          gradle clean build -x test              
-      - name: Docker ${{env.APP_NAME}} Update
-        run : |
-          bash ${{env.APP_NAME}}_update.sh
-      - name: Docker Compose up
-        run : |
-          cd /home/ditar/DataDrive/actions-runner/keeper-actions/${{env.DIR_NAME}}
-          docker compose -f ${{env.COMPOSE_NAME}} up -d
+          clean: false
 
+      - name: Gradle build
+        run: gradle clean build -x test
+
+      - name: Sync into repositories/${{ env.LAYER }}/${{ env.SERVICE }}
+        run: |
+          LAYER_DIR="${{ env.KEEPER_ROOT }}/${{ env.LAYER }}"
+          DEST="$LAYER_DIR/${{ env.SERVICE }}"
+          mkdir -p "$DEST"
+          SRC="$(pwd -P)"
+          DST="$(cd "$DEST" && pwd -P)"
+          if [ "$SRC" != "$DST" ]; then
+            rsync -a --exclude '.git' ./ "$DEST/"
+          fi
+
+      - name: Compose up ${{ env.SERVICE }}
+        run: |
+          LAYER_DIR="${{ env.KEEPER_ROOT }}/${{ env.LAYER }}"
+          docker compose --project-directory "$LAYER_DIR" \
+            --env-file "${{ env.KEEPER_ROOT }}/.env" \
+            -f "$LAYER_DIR/${{ env.COMPOSE_FILE }}" \
+            up -d --build --no-deps --force-recreate "${{ env.SERVICE }}"

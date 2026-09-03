@@ -1,5 +1,5 @@
 server:
-  name: keeper-core-eureka
+  name: keeper-eureka
   port: 8761
   ip: host.docker.internal
   eureka:
