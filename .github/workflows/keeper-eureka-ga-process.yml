@@ -4,6 +4,8 @@ env:
   LAYER: core
   COMPOSE_FILE: keeper-core-compose.yml
   KEEPER_ROOT: /home/ditar/DataDrive/actions-runner/keeper-actions/repositories
+  LAYER_DIR: /home/ditar/DataDrive/actions-runner/keeper-actions/repositories/core
+  DEST: /home/ditar/DataDrive/actions-runner/keeper-actions/repositories/core/keeper-eureka
 on:
   push:
     branches:
@@ -21,21 +23,14 @@ jobs:
       - name: Gradle build
         run: gradle clean build -x test
 
-      - name: Sync into repositories/${{ env.LAYER }}/${{ env.SERVICE }}
+      - name: Publish into repositories
         run: |
-          LAYER_DIR="${{ env.KEEPER_ROOT }}/${{ env.LAYER }}"
-          DEST="$LAYER_DIR/${{ env.SERVICE }}"
-          mkdir -p "$DEST"
-          SRC="$(pwd -P)"
-          DST="$(cd "$DEST" && pwd -P)"
-          if [ "$SRC" != "$DST" ]; then
-            rsync -a --exclude '.git' ./ "$DEST/"
-          fi
+          mkdir -p "${{ env.DEST }}"
+          rsync -a --exclude '.git' ./ "${{ env.DEST }}/"
 
       - name: Compose up ${{ env.SERVICE }}
         run: |
-          LAYER_DIR="${{ env.KEEPER_ROOT }}/${{ env.LAYER }}"
-          docker compose --project-directory "$LAYER_DIR" \
+          docker compose --project-directory "${{ env.LAYER_DIR }}" \
             --env-file "${{ env.KEEPER_ROOT }}/.env" \
-            -f "$LAYER_DIR/${{ env.COMPOSE_FILE }}" \
+            -f "${{ env.LAYER_DIR }}/${{ env.COMPOSE_FILE }}" \
             up -d --build --no-deps --force-recreate "${{ env.SERVICE }}"
