@@ -23,7 +23,7 @@ class AppInfo {
     private val version: String? = null
 
     private val startDelimiter = "=============^_^============="
-    private val stopDelimiter = "============================="
+    private val stopDelimiter = "============================= "
 
     private val ln = "\n"
     private val startTime = Date()
